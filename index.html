@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Maad — Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #000;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* ================= VIDEO BACKGROUND ================= */
+
+#bgVideo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -3;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,0,0,.78),
+            rgba(255,255,255,.05),
+            rgba(0,0,0,.82)
+        );
+    z-index: -2;
+}
+
+/* ================= EFEK KACA ================= */
+
+.glass {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.22);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 15px 40px rgba(0,0,0,.35);
+}
+
+/* ================= CONTAINER ================= */
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 40px 0;
+}
+
+.hero-text {
+    max-width: 620px;
+}
+
+.small-title {
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: clamp(50px, 10vw, 110px);
+    line-height: .9;
+    text-transform: uppercase;
+    letter-spacing: -5px;
+}
+
+.hero h1 span {
+    color: transparent;
+    -webkit-text-stroke: 1px white;
+}
+
+.description {
+    margin-top: 25px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #ddd;
+}
+
+/* ================= PROFIL KANAN ================= */
+
+.profile-area {
+    width: 280px;
+    min-width: 280px;
+    padding: 20px;
+    border-radius: 25px;
+    text-align: center;
+    animation: floating 4s ease-in-out infinite;
+}
+
+.profile-area img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.7);
+    filter: grayscale(100%);
+}
+
+.profile-name {
+    font-size: 25px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.profile-job {
+    color: #bbb;
+    margin-top: 6px;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.contact a {
+    text-decoration: none;
+    color: white;
+    padding: 11px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,.3);
+    background: rgba(0,0,0,.3);
+    transition: .3s;
+    font-size: 14px;
+}
+
+.contact a:hover {
+    background: white;
+    color: black;
+    transform: translateY(-4px);
+}
+
+/* ================= SCROLL INFO ================= */
+
+.info-section {
+    min-height: 100vh;
+    padding: 100px 0;
+}
+
+.info-title {
+    text-align: center;
+    font-size: clamp(35px, 7vw, 70px);
+    margin-bottom: 50px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.info-card {
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 180px;
+    transition: .3s;
+}
+
+.info-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255,255,255,.14);
+}
+
+.info-card h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.info-card p {
+    color: #ddd;
+    line-height: 1.8;
+}
+
+/* ================= QUOTE ================= */
+
+.quote-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.quote-box {
+    max-width: 850px;
+    padding: 45px 30px;
+    border-radius: 25px;
+}
+
+.quote {
+    font-size: clamp(25px, 5vw, 55px);
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.quote span {
+    color: #aaa;
+}
+
+.quote-small {
+    margin-top: 25px;
+    color: #ccc;
+    font-size: 18px;
+}
+
+/* ================= CALL ME ================= */
+
+.call-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.call-box {
+    padding: 45px;
+    border-radius: 25px;
+}
+
+.call-box h2 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.call-box p {
+    color: #bbb;
+    margin-bottom: 25px;
+}
+
+.call-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 30px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.call-btn:hover {
+    transform: scale(1.08);
+}
+
+/* ================= MUSIC BUTTON ================= */
+
+.sound-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.4);
+
+    background: rgba(0,0,0,.45);
+    color: white;
+
+    cursor: pointer;
+    font-size: 18px;
+    backdrop-filter: blur(10px);
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+    font-size: 13px;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes floating {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 750px) {
+
+    .hero {
+        flex-direction: column-reverse;
+        justify-content: center;
+        text-align: center;
+        padding-top: 80px;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero h1 {
+        font-size: 60px;
+    }
+
+    .profile-area {
+        width: 260px;
+        min-width: 260px;
+    }
+
+    .profile-area img {
+        width: 190px;
+        height: 190px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-section {
+        padding-top: 80px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= VIDEO BACKGROUND ================= -->
+
+<video id="bgVideo"
+       autoplay
+       muted
+       loop
+       playsinline>
+    <source src="background2.mp4" type="video/mp4">
+</video>
+
+<!-- ================= AUDIO ================= -->
+
+<audio id="bgMusic" loop>
+    <source src="sound3.mp3" type="audio/mpeg">
+</audio>
+
+<div class="overlay"></div>
+
+<!-- ================= SOUND BUTTON ================= -->
+
+<button class="sound-btn" id="soundBtn">
+    🔇
+</button>
+
+<div class="container">
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <div class="small-title">
+            PERSONAL PORTFOLIO
+        </div>
+
+        <h1>
+            MAAD<br>
+            <span>panggil joy aja.</span>
+        </h1>
+
+        <p class="description">
+            Seorang lulusan SMK Manajemen Pemasaran
+            yang mempunyai ketertarikan pada teknologi,
+            robotik, komputer, dan dunia kreatif.
+        </p>
+
+    </div>
+
+    <!-- ================= PROFIL ================= -->
+
+    <div class="profile-area glass">
+
+        <img src="fotopropil1.png" alt="Foto Profil Maad">
+
+        <div class="profile-name">
+            Maad
+        </div>
+
+        <div class="profile-job">
+            SMK bhakti mandiri 
+        </div>
+
+        <!-- ================= CONTACT ================= -->
+
+        <div class="contact">
+
+            <a href="https://wa.me/6283898633676"
+               target="_blank">
+                WhatsApp
+            </a>
+
+            <a href="https://www.instagram.com/nurmaad87?stkn=MWduZm01ejNncG85bQ=="
+               target="_blank">
+                Instagram
+            </a>
+
+            <a href="mailto:nurmaad67@gmail.com">
+                Email
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= INFO ================= -->
+
+<section class="info-section">
+
+    <h2 class="info-title">
+        ABOUT ME
+    </h2>
+
+    <div class="info-grid">
+
+        <div class="info-card glass">
+
+            <h2> Tentang Saya</h2>
+
+            <p>
+                Nama saya Maad. Saya merupakan lulusan
+                SMK jurusan Manajemen Pemasaran.
+                Saya tertarik mempelajari teknologi,
+                komputer, robotik, dan hal-hal kreatif.
+            </p>
+
+        </div>
+
+        <div class="info-card glass">
+
+            <h2> Hobi</h2>
+
+            <p>
+                Saya mempunyai hobi robotik dan menggambar.
+                Saya suka mencoba membuat sesuatu,
+                bereksperimen, dan mempelajari hal baru.
+            </p>
+
+        </div>
+
+        <div class="info-card glass">
+
+            <h2> Keahlian</h2>
+
+            <p>
+                Mampu mengoperasikan komputer,
+                Microsoft Word dasar, serta mempunyai
+                pengalaman menggunakan teknologi dan
+                mencoba berbagai proyek sederhana.
+            </p>
+
+        </div>
+
+        <div class="info-card glass">
+
+            <h2> Ketertarikan</h2>
+
+            <p>
+                Robotik, komputer, teknologi,
+                desain, menggambar, website,
+                dan berbagai eksperimen kreatif.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= QUOTE ================= -->
+
+<section class="quote-section">
+
+    <div class="quote-box glass">
+
+        <div class="quote">
+            “Kalo ga nekat,<br>
+            <span>ga bakal jadi orang hebat.</span>”
+        </div>
+
+        <div class="quote-small">
+            — Kata Ardian
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FINAL QUOTE ================= -->
+
+<section class="quote-section">
+
+    <div class="quote-box glass">
+
+        <div class="quote">
+            “Ledakan adalah seni.”
+        </div>
+
+        <div class="quote-small">
+            Sebuah kalimat untuk menggambarkan
+            sisi eksperimental dan kreatif.
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= CALL ME ================= -->
+
+<section class="call-section">
+
+    <div class="call-box glass">
+
+        <h2>
+            Ingin membuat seperti ini?
+        </h2>
+
+        <p>
+            Punya ide website atau project?
+            Hubungi saya.
+        </p>
+
+        <a class="call-btn"
+           href="https://wa.me/628XXXXXXXXXX"
+           target="_blank">
+            CALL ME
+        </a>
+
+    </div>
+
+</section>
+
+</div>
+
+<footer>
+    © 2026 Maad — Personal Portfolio
+</footer>
+
+<script>
+
+/* ================= VIDEO + AUDIO ================= */
+
+const video = document.getElementById("bgVideo");
+const music = document.getElementById("bgMusic");
+const soundBtn = document.getElementById("soundBtn");
+
+let musicStarted = false;
+
+soundBtn.addEventListener("click", function() {
+
+    if (music.paused) {
+
+        music.play().then(function() {
+
+            musicStarted = true;
+            soundBtn.innerHTML = "tutup";
+
+        }).catch(function() {
+
+            console.log("Audio diblokir browser.");
+
+        });
+
+    } else {
+
+        music.pause();
+        soundBtn.innerHTML = "clik";
+
+    }
+
+});
+
+/* ================= VIDEO AUTOPLAY ================= */
+
+window.addEventListener("load", function() {
+
+    video.play().catch(function() {
+        console.log("Autoplay video dibatasi browser.");
+    });
+
+});
+
+</script>
+
+</body
